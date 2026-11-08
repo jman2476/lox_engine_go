@@ -55,18 +55,6 @@ func SetPawns(side Side) (positions uint64) {
 func SetKings(side Side) uint64 {
 	switch side {
 	case White:
-		return imath.Exp2(3)
-	case Black:
-		return imath.Exp2(59)
-	}
-
-	// Error value
-	return imath.Exp2(3) + imath.Exp2(59)
-}
-
-func SetQueens(side Side) uint64 {
-	switch side {
-	case White:
 		return imath.Exp2(4)
 	case Black:
 		return imath.Exp2(60)
@@ -74,4 +62,16 @@ func SetQueens(side Side) uint64 {
 
 	// Error value
 	return imath.Exp2(4) + imath.Exp2(60)
+}
+
+func SetQueens(side Side) uint64 {
+	switch side {
+	case White:
+		return imath.Exp2(3)
+	case Black:
+		return imath.Exp2(59)
+	}
+
+	// Error value
+	return imath.Exp2(3) + imath.Exp2(59)
 }
