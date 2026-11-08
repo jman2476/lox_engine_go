@@ -14,3 +14,9 @@ func Pow(base, exp int) int {
 	}
 	return result
 }
+
+func Exp2(exp uint64) (result uint64) {
+	result = 1 << exp
+	return
+
+}

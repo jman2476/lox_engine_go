@@ -33,3 +33,34 @@ func TestBasicExponential(t *testing.T) {
 		}
 	}
 }
+
+func TestExp2(t *testing.T) {
+	cases := []struct {
+		input    uint64
+		expected uint64
+	}{
+		{
+			input:    0,
+			expected: 1,
+		}, {
+			input:    7,
+			expected: 128,
+		}, {
+			input:    1,
+			expected: 2,
+		}, {
+			input:    32,
+			expected: 4294967296,
+		},
+	}
+
+	for _, c := range cases {
+		result := Exp2(c.input)
+		if result != c.expected {
+			t.Errorf(
+				"Fail: Case: %d\nExpected: %d\nActual: %d\n",
+				c.input, c.expected, result,
+			)
+		}
+	}
+}
