@@ -15,6 +15,10 @@ type Board struct {
 	bKnight uint64
 }
 
+const (
+	wPawnStart uint64 = 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2
+)
+
 func (b Board) Print() {
 
 }
