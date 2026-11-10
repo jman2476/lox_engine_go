@@ -19,3 +19,17 @@ func Exp2(exp uint64) (result uint64) {
 	result = 1 << exp
 	return
 }
+
+func GetIndices(bitmap uint64) []int {
+	var indices []int
+	for i := range 64 {
+		if bitmap == 0 {
+			break
+		}
+		if bitmap&1 == 1 {
+			indices = append(indices, i)
+		}
+		bitmap >>= 1
+	}
+	return indices
+}

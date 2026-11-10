@@ -64,3 +64,47 @@ func TestExp2(t *testing.T) {
 		}
 	}
 }
+
+func TestGetIndices(t *testing.T) {
+	cases := []struct {
+		input    uint64
+		expected []int
+	}{
+		{
+			input:    1,
+			expected: []int{0},
+		}, {
+			input:    4294967296,
+			expected: []int{32},
+		}, {
+			input:    10,
+			expected: []int{1, 3},
+		}, {
+			input:    0b010100011101011010110101011010101,
+			expected: []int{0, 2, 4, 6, 7, 9, 11, 13, 14, 16, 18, 19, 21, 23, 24, 25, 29, 31},
+		},
+	}
+
+	for _, c := range cases {
+		result := GetIndices(c.input)
+		if len(result) != len(c.expected) {
+			t.Errorf(
+				"Fail: case %d\nExpected: %v\nActual: %v\n",
+				c.input,
+				c.expected,
+				result,
+			)
+		}
+
+		for i, val := range result {
+			if val != c.expected[i] {
+				t.Errorf(
+					"Fail: case %d at index %d\nExpected: %v\nActual: %v\n",
+					c.input, i,
+					c.expected,
+					result,
+				)
+			}
+		}
+	}
+}
