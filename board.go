@@ -75,3 +75,36 @@ func SetQueens(side Side) uint64 {
 	// Error value
 	return imath.Exp2(3) + imath.Exp2(59)
 }
+
+func SetBishops(side Side) uint64 {
+	switch side {
+	case White:
+		return imath.Exp2(2) + imath.Exp2(5)
+	case Black:
+		return imath.Exp2(58) + imath.Exp2(61)
+	}
+
+	return imath.Exp2(2) + imath.Exp2(5) + imath.Exp2(58) + imath.Exp2(61)
+}
+
+func SetKnights(side Side) uint64 {
+	switch side {
+	case White:
+		return imath.Exp2(1) + imath.Exp2(6)
+	case Black:
+		return imath.Exp2(57) + imath.Exp2(62)
+	}
+
+	return imath.Exp2(2) + imath.Exp2(5) + imath.Exp2(58) + imath.Exp2(61)
+}
+
+func SetRooks(side Side) uint64 {
+	switch side {
+	case White:
+		return imath.Exp2(0) + imath.Exp2(7)
+	case Black:
+		return imath.Exp2(56) + imath.Exp2(63)
+	}
+
+	return imath.Exp2(2) + imath.Exp2(5) + imath.Exp2(58) + imath.Exp2(61)
+}

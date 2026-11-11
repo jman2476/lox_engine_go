@@ -15,9 +15,8 @@ func Pow(base, exp int) int {
 	return result
 }
 
-func Exp2(exp uint64) (result uint64) {
-	result = 1 << exp
-	return
+func Exp2(exp uint64) uint64 {
+	return 1 << exp
 }
 
 func GetIndices(bitmap uint64) []int {
