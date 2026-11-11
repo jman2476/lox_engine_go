@@ -72,8 +72,6 @@ func (b *Board) Print() {
 		}
 	}
 
-	// slices.Reverse(board)
-
 	var printBoard string
 	var line strings.Builder
 	var files = "  a b c d e f g h"
