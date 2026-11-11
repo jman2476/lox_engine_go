@@ -107,3 +107,41 @@ func (b *Board) GetSide(side Side) PieceSet {
 	}
 	return b.Black
 }
+
+func (ps *PieceSet) GetPiece(piece rune) uint64 {
+	switch piece {
+	case 'p':
+		return ps.GetPawn()
+	case 'k':
+		return ps.GetKing()
+	case 'q':
+		return ps.GetQueen()
+	case 'b':
+		return ps.GetBishop()
+	case 'n':
+		return ps.GetKnight()
+	case 'r':
+		return ps.GetRook()
+	}
+
+	return 0
+}
+
+func (ps *PieceSet) GetPawn() uint64 {
+	return ps.Pawn
+}
+func (ps *PieceSet) GetKing() uint64 {
+	return ps.King
+}
+func (ps *PieceSet) GetQueen() uint64 {
+	return ps.Queen
+}
+func (ps *PieceSet) GetBishop() uint64 {
+	return ps.Bishop
+}
+func (ps *PieceSet) GetKnight() uint64 {
+	return ps.Knight
+}
+func (ps *PieceSet) GetRook() uint64 {
+	return ps.Rook
+}
