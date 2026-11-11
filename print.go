@@ -91,7 +91,24 @@ func (b *Board) Print() {
 		if i%8 == 0 {
 			printBoard.WriteRune('\n')
 		}
-		printBoard.WriteRune(board[i])
+		if board[i] == 0 {
+			r, f := (i/8)%2, i%2
+			if r == 0 {
+				if f == 0 {
+					printBoard.WriteRune('O')
+				} else {
+					printBoard.WriteRune('X')
+				}
+			} else {
+				if f == 1 {
+					printBoard.WriteRune('O')
+				} else {
+					printBoard.WriteRune('X')
+				}
+			}
+		} else {
+			printBoard.WriteRune(board[i])
+		}
 	}
 
 	fmt.Println("Board state:")
