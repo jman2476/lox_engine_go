@@ -87,9 +87,15 @@ func (b *Board) Print() {
 	slices.Reverse(board)
 
 	var printBoard strings.Builder
+
+	printBoard.WriteString("  1 2 3 4 5 6 7 8")
+
 	for i := range 64 {
 		if i%8 == 0 {
+			file := rune(104 - i/8)
 			printBoard.WriteRune('\n')
+			printBoard.WriteRune(file)
+			printBoard.WriteRune(' ')
 		}
 		if board[i] == 0 {
 			r, f := (i/8)%2, i%2
@@ -109,6 +115,7 @@ func (b *Board) Print() {
 		} else {
 			printBoard.WriteRune(board[i])
 		}
+		printBoard.WriteRune(' ')
 	}
 
 	fmt.Println("Board state:")

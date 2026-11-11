@@ -28,10 +28,6 @@ const (
 func (b *Board) SetNew() {
 	b.White = SetupSide(White)
 	b.Black = SetupSide(Black)
-
-	/* fmt.Printf("White: %v\n", b.White)
-	fmt.Printf("Black: %v\n", b.Black)
-	fmt.Printf("White Pawn indices %v\n", imath.GetIndices(b.White.Pawn) */
 }
 
 func SetupSide(side Side) (pieces PieceSet) {
