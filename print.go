@@ -2,22 +2,10 @@ package main
 
 import (
 	"fmt"
-	"slices"
 	"strings"
 
 	imath "github.com/jman2476/lox_engine_go/internal/intmath"
 )
-
-type PrintBoard struct {
-	a []rune
-	b []rune
-	c []rune
-	d []rune
-	e []rune
-	f []rune
-	g []rune
-	h []rune
-}
 
 var (
 	whitePieces = []rune{'K', 'Q', 'P', 'N', 'B', 'R'}
@@ -77,46 +65,57 @@ func (b *Board) Print() {
 		knightidx := imath.GetIndices(set.Knight)
 		for _, val := range knightidx {
 			if side == White {
-				board[val] = 'K'
+				board[val] = 'N'
 			} else {
-				board[val] = 'k'
+				board[val] = 'n'
 			}
 		}
 	}
 
-	slices.Reverse(board)
+	// slices.Reverse(board)
 
-	var printBoard strings.Builder
-
-	printBoard.WriteString("  1 2 3 4 5 6 7 8")
+	var printBoard string
+	var line strings.Builder
+	var files = "  a b c d e f g h"
 
 	for i := range 64 {
 		if i%8 == 0 {
-			rank := string(rune(104 - i/8))
-			lineStart := fmt.Sprintf("\n%s ", rank)
-			printBoard.WriteString(lineStart)
+			line.Reset()
+			rank := string(rune(49 + i/8))
+			lineStart := fmt.Sprintf("%s ", rank)
+			line.WriteString(lineStart)
 		}
 		if board[i] == 0 {
 			r, f := (i/8)%2, i%2
 			if r == 0 {
 				if f == 0 {
-					printBoard.WriteRune('.')
+					line.WriteRune('=')
 				} else {
-					printBoard.WriteRune('=')
+					line.WriteRune('.')
 				}
 			} else {
 				if f == 1 {
-					printBoard.WriteRune('.')
+					line.WriteRune('=')
 				} else {
-					printBoard.WriteRune('=')
+					line.WriteRune('.')
 				}
 			}
 		} else {
-			printBoard.WriteRune(board[i])
+			line.WriteRune(board[i])
 		}
-		printBoard.WriteRune(' ')
+
+		line.WriteRune(' ')
+
+		if i%8 == 7 {
+			printBoard = prependLine(
+				printBoard, line.String())
+		}
 	}
 
 	fmt.Println("Board state:")
-	fmt.Println(printBoard.String())
+	fmt.Println(prependLine(printBoard, files))
+}
+
+func prependLine(current, newLine string) string {
+	return newLine + "\n" + current
 }
