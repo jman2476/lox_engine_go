@@ -42,19 +42,11 @@ func SetupSide(side Side) (pieces PieceSet) {
 }
 
 func SetPawns(side Side) (positions uint64) {
-	// row := 0b11111111
-	switch side {
-	case White:
-		for i := 8; i < 16; i++ {
-			positions += imath.Exp2(uint64(i))
-		}
-	case Black:
-		for i := 48; i < 56; i++ {
-			positions += imath.Exp2(uint64(i))
-		}
+	row := 0b11111111
+	if side == White {
+		return uint64(row << 8)
 	}
-
-	return
+	return uint64(row << 48)
 }
 
 func SetKings(side Side) uint64 {
