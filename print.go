@@ -100,15 +100,15 @@ func (b *Board) Print() {
 			r, f := (i/8)%2, i%2
 			if r == 0 {
 				if f == 0 {
-					printBoard.WriteRune('O')
+					printBoard.WriteRune('.')
 				} else {
-					printBoard.WriteRune('X')
+					printBoard.WriteRune('=')
 				}
 			} else {
 				if f == 1 {
-					printBoard.WriteRune('O')
+					printBoard.WriteRune('.')
 				} else {
-					printBoard.WriteRune('X')
+					printBoard.WriteRune('=')
 				}
 			}
 		} else {
