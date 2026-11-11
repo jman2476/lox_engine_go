@@ -124,3 +124,81 @@ func TestFileCharToInt(t *testing.T) {
 		}
 	}
 }
+
+func TestParseMove(t *testing.T) {
+	cases := []struct {
+		input string
+		from  int
+		to    int
+		promo rune
+		err   error
+	}{
+		{
+			input: "a1b5",
+			from:  0,
+			to:    33,
+			promo: 0,
+		},
+		{
+			input: "a1b5q",
+			from:  0,
+			to:    33,
+			promo: 113,
+		},
+		{
+			input: "h4c4",
+			from:  31,
+			to:    26,
+			promo: 0,
+		},
+		{
+			input: "g7f8n",
+			from:  54,
+			to:    61,
+			promo: 110,
+		},
+		{
+			input: "a0b5",
+			from:  -1,
+			to:    -1,
+			promo: 0,
+			err:   ErrInvalidSquare,
+		},
+	}
+
+	for _, c := range cases {
+		from, to, promo, err := parseMove(c.input)
+		if from != c.from {
+			t.Errorf(
+				"Fail: case %s\nExpected: %v\nActual: %v\n",
+				c.input,
+				c.from,
+				from,
+			)
+		}
+		if to != c.to {
+			t.Errorf(
+				"Fail: case %s\nExpected: %v\nActual: %v\n",
+				c.input,
+				c.to,
+				to,
+			)
+		}
+		if promo != c.promo {
+			t.Errorf(
+				"Fail: case %s\nExpected: %v\nActual: %v\n",
+				c.input,
+				c.promo,
+				promo,
+			)
+		}
+		if err != nil && err != c.err {
+			t.Errorf(
+				"Fail: case %s\nExpected: %v\nActual: %v\n",
+				c.input,
+				c.err,
+				err,
+			)
+		}
+	}
+}

@@ -11,15 +11,29 @@ var (
 	ErrInvalidSquare = errors.New("square does not exist between a1 and h8")
 )
 
-func parseMove(move string) (from, to int, err error) {
+func parseMove(move string) (int, int, rune, error) {
 	if len(move) < 4 {
-		return -1, -1, ErrMoveTooShort
+		return -1, -1, 0, ErrMoveTooShort
 	}
 	if len(move) > 5 {
-		return -1, -1, ErrMoveTooLong
+		return -1, -1, 0, ErrMoveTooLong
 	}
 
-	return 0, 0, nil
+	from, err := parseSquare(move[:2])
+	if err != nil {
+		return -1, -1, 0, err
+	}
+
+	to, err := parseSquare(move[2:4])
+	if err != nil {
+		return -1, -1, 0, err
+	}
+
+	var promo rune
+	if len(move) > 4 {
+		promo = rune(move[4])
+	}
+	return from, to, promo, nil
 }
 
 func parseSquare(square string) (int, error) {
