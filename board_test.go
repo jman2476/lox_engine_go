@@ -6,9 +6,12 @@ func TestNoOverlaps(t *testing.T) {
 	// var sum uint64
 	var board Board
 
-	sum := board.bBishop & board.wBishop & board.wPawn & board.bPawn & board.wKing & board.bKing & board.wQueen & board.bQueen & board.wKnight & board.bKnight & board.wRook & board.bRook
+	board.SetNew()
 
-	if sum != 0 {
-		t.Errorf("Overlaps exist on the board: resulting value is %b", sum)
+	white := board.White.Bishop & board.White.King & board.White.Knight & board.White.Queen & board.White.Rook & board.White.Pawn
+	black := board.Black.Bishop & board.Black.King & board.Black.Knight & board.Black.Queen & board.Black.Rook & board.Black.Pawn
+
+	if black&white != 0 {
+		t.Errorf("Overlaps exist on the board: resulting value is %b", black&white)
 	}
 }

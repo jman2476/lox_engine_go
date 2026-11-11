@@ -1,24 +1,21 @@
 package main
 
 import (
-	"fmt"
-
 	imath "github.com/jman2476/lox_engine_go/internal/intmath"
 )
 
 type Board struct {
-	wPawn   uint64
-	bPawn   uint64
-	wKing   uint64
-	bKing   uint64
-	wQueen  uint64
-	bQueen  uint64
-	wRook   uint64
-	bRook   uint64
-	wBishop uint64
-	bBishop uint64
-	wKnight uint64
-	bKnight uint64
+	White PieceSet
+	Black PieceSet
+}
+
+type PieceSet struct {
+	Pawn   uint64
+	King   uint64
+	Queen  uint64
+	Bishop uint64
+	Knight uint64
+	Rook   uint64
 }
 
 type Side int
@@ -28,16 +25,28 @@ const (
 	Black
 )
 
-func (b Board) Print() {
-	fmt.Println("Board")
+func (b *Board) SetNew() {
+	b.White = SetupSide(White)
+	b.Black = SetupSide(Black)
+
+	/* fmt.Printf("White: %v\n", b.White)
+	fmt.Printf("Black: %v\n", b.Black)
+	fmt.Printf("White Pawn indices %v\n", imath.GetIndices(b.White.Pawn) */
 }
 
-func (b Board) SetNew() {
-	b.wPawn = SetPawns(White)
-	b.bPawn = SetPawns(Black)
+func SetupSide(side Side) (pieces PieceSet) {
+	pieces.Pawn = SetPawns(side)
+	pieces.King = SetKings(side)
+	pieces.Queen = SetQueens(side)
+	pieces.Bishop = SetBishops(side)
+	pieces.Knight = SetKnights(side)
+	pieces.Rook = SetRooks(side)
+
+	return
 }
 
 func SetPawns(side Side) (positions uint64) {
+	// row := 0b11111111
 	switch side {
 	case White:
 		for i := 8; i < 16; i++ {
@@ -107,4 +116,11 @@ func SetRooks(side Side) uint64 {
 	}
 
 	return imath.Exp2(2) + imath.Exp2(5) + imath.Exp2(58) + imath.Exp2(61)
+}
+
+func (b *Board) GetSide(side Side) PieceSet {
+	if side == White {
+		return b.White
+	}
+	return b.Black
 }
