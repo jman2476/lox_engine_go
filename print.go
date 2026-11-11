@@ -92,10 +92,9 @@ func (b *Board) Print() {
 
 	for i := range 64 {
 		if i%8 == 0 {
-			file := rune(104 - i/8)
-			printBoard.WriteRune('\n')
-			printBoard.WriteRune(file)
-			printBoard.WriteRune(' ')
+			rank := string(rune(104 - i/8))
+			lineStart := fmt.Sprintf("\n%s ", rank)
+			printBoard.WriteString(lineStart)
 		}
 		if board[i] == 0 {
 			r, f := (i/8)%2, i%2
@@ -119,5 +118,5 @@ func (b *Board) Print() {
 	}
 
 	fmt.Println("Board state:")
-	fmt.Print(printBoard.String())
+	fmt.Println(printBoard.String())
 }
