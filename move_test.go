@@ -69,9 +69,18 @@ func TestMovePiece(t *testing.T) {
 	cases := []struct {
 		move     string
 		piece    rune
+		side     Side
 		expected int
 		err      error
 	}{
 		{},
+	}
+
+	for _, c := range cases {
+		pieces := board.GetSide(c.side)
+		err := movePiece(c.move, &pieces)
+		if err != nil && err != c.err {
+
+		}
 	}
 }
