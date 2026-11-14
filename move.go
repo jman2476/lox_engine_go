@@ -23,3 +23,8 @@ func findPiece(square int, pieces PieceSet) (rune, error) {
 
 	return 0, ErrNoPieceFound
 }
+
+func movePiece(move string, pieces *PieceSet) error {
+
+	return nil
+}

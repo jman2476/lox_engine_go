@@ -61,3 +61,17 @@ func TestFindPiece(t *testing.T) {
 		}
 	}
 }
+
+func TestMovePiece(t *testing.T) {
+	var board Board
+	board.SetNew()
+
+	cases := []struct {
+		move     string
+		piece    rune
+		expected int
+		err      error
+	}{
+		{},
+	}
+}
