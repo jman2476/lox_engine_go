@@ -108,11 +108,11 @@ func SetRooks(side Side) uint64 {
 	return imath.Exp2(2) + imath.Exp2(5) + imath.Exp2(58) + imath.Exp2(61)
 }
 
-func (b *Board) GetSide(side Side) PieceSet {
+func (b *Board) GetSide(side Side) *PieceSet {
 	if side == White {
-		return b.White
+		return &b.White
 	}
-	return b.Black
+	return &b.Black
 }
 
 func (ps *PieceSet) GetPiece(piece rune) *uint64 {

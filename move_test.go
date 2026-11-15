@@ -91,7 +91,7 @@ func TestMovePiece(t *testing.T) {
 		pieces := board.GetSide(c.side)
 		fmt.Printf("Before: %b\n", *(pieces.GetPiece(c.piece)))
 		board.Print()
-		err := movePiece(c.move, &pieces)
+		err := movePiece(c.move, pieces)
 		fmt.Printf("After: %b\n", *(pieces.GetPiece(c.piece)))
 		board.Print()
 		if err != nil && err != c.err {
