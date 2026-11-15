@@ -84,6 +84,24 @@ func TestMovePiece(t *testing.T) {
 			side:     White,
 			expected: board.White.Pawn - imath.Exp2(12) + imath.Exp2(28),
 			err:      nil,
+		}, {
+			move:     "e7f5",
+			piece:    'p',
+			side:     Black,
+			expected: board.Black.Pawn - imath.Exp2(52) + imath.Exp2(37),
+			err:      nil,
+		}, {
+			move:     "a3e5",
+			piece:    'q',
+			side:     White,
+			expected: board.White.Queen,
+			err:      ErrNoPieceFound,
+		}, {
+			move:     "b1c3",
+			piece:    'n',
+			side:     White,
+			expected: board.White.Knight - imath.Exp2(1) + imath.Exp2(18),
+			err:      nil,
 		},
 	}
 
@@ -106,7 +124,7 @@ func TestMovePiece(t *testing.T) {
 			t.Errorf(
 				"Fail: Result != Expected\nCase: %s %q %s\nExpected: %b\nActual: %b",
 				c.move, c.piece, c.side,
-				c.expected, pieces.GetPiece(c.piece),
+				c.expected, *(pieces.GetPiece(c.piece)),
 			)
 		}
 	}
