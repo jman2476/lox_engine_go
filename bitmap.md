@@ -11,3 +11,18 @@ In the 64-bit map, the least significant bit (LSB) will correspond to a1 and the
 | 3 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 |
 | 2 | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 |
 | 1 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  |
+
+## What data to store to undo a move:
+capture: piece type -> 3 bits
+
+captured side: 1 bit
+
+castling: 4 bits
+
+ep sq: ep available -> 1 bit
+
+  ep sq -> 7 bits
+
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
+| - | - | - | - | - | - | - | - | - | - | -  | -  | -  | -  | -  |  - |
+| capture side | > | cap type | < | wqsc | wksc | bqsc | bksc | ep available | >>> | >>  | >  | ep sq  | <  | <<  |  <<< |
