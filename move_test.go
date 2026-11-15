@@ -13,28 +13,28 @@ func TestFindPiece(t *testing.T) {
 	cases := []struct {
 		input     int
 		side      Side
-		expected  rune
+		expected  Piece
 		expectErr error
 	}{
 		{
 			input:     0,
 			side:      White,
-			expected:  'r',
+			expected:  Rook,
 			expectErr: nil,
 		}, {
 			input:     59,
 			side:      Black,
-			expected:  'q',
+			expected:  Queen,
 			expectErr: nil,
 		}, {
 			input:     32,
 			side:      White,
-			expected:  0,
+			expected:  None,
 			expectErr: ErrNoPieceFound,
 		}, {
 			input:     4,
 			side:      Black,
-			expected:  0,
+			expected:  None,
 			expectErr: ErrNoPieceFound,
 		},
 	}
@@ -73,32 +73,32 @@ func TestMovePiece(t *testing.T) {
 
 	cases := []struct {
 		move     string
-		piece    rune
+		piece    Piece
 		side     Side
 		expected uint64
 		err      error
 	}{
 		{
 			move:     "e2e4",
-			piece:    'p',
+			piece:    Pawn,
 			side:     White,
 			expected: board.White.Pawn - imath.Exp2(12) + imath.Exp2(28),
 			err:      nil,
 		}, {
 			move:     "e7f5",
-			piece:    'p',
+			piece:    Pawn,
 			side:     Black,
 			expected: board.Black.Pawn - imath.Exp2(52) + imath.Exp2(37),
 			err:      nil,
 		}, {
 			move:     "a3e5",
-			piece:    'q',
+			piece:    Queen,
 			side:     White,
 			expected: board.White.Queen,
 			err:      ErrNoPieceFound,
 		}, {
 			move:     "b1c3",
-			piece:    'n',
+			piece:    Knight,
 			side:     White,
 			expected: board.White.Knight - imath.Exp2(1) + imath.Exp2(18),
 			err:      nil,

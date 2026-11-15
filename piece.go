@@ -3,7 +3,8 @@ package main
 type Piece uint8
 
 const (
-	Pawn Piece = iota
+	None Piece = iota
+	Pawn
 	King
 	Queen
 	Bishop

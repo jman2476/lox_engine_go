@@ -10,9 +10,9 @@ var (
 	ErrNoPieceFound = errors.New("no piece found to move")
 )
 
-func findPiece(square int, pieces *PieceSet) (rune, error) {
+func findPiece(square int, pieces *PieceSet) (Piece, error) {
 	v := imath.Exp2(uint64(square))
-	types := []rune{'p', 'k', 'q', 'b', 'r', 'n'}
+	types := []Piece{Pawn, King, Queen, Bishop, Knight, Rook}
 
 	for _, t := range types {
 		set := pieces.GetPiece(t)
@@ -21,7 +21,7 @@ func findPiece(square int, pieces *PieceSet) (rune, error) {
 		}
 	}
 
-	return 0, ErrNoPieceFound
+	return None, ErrNoPieceFound
 }
 
 func movePiece(move string, pieceSet *PieceSet) error {

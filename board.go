@@ -115,19 +115,19 @@ func (b *Board) GetSide(side Side) *PieceSet {
 	return &b.Black
 }
 
-func (ps *PieceSet) GetPiece(piece rune) *uint64 {
+func (ps *PieceSet) GetPiece(piece Piece) *uint64 {
 	switch piece {
-	case 'p':
+	case Pawn:
 		return ps.GetPawn()
-	case 'k':
+	case King:
 		return ps.GetKing()
-	case 'q':
+	case Queen:
 		return ps.GetQueen()
-	case 'b':
+	case Bishop:
 		return ps.GetBishop()
-	case 'n':
+	case Knight:
 		return ps.GetKnight()
-	case 'r':
+	case Rook:
 		return ps.GetRook()
 	}
 
