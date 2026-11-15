@@ -130,7 +130,7 @@ func TestParseMove(t *testing.T) {
 		input string
 		from  int
 		to    int
-		promo rune
+		promo Piece
 		err   error
 	}{
 		{
@@ -143,7 +143,7 @@ func TestParseMove(t *testing.T) {
 			input: "a1b5q",
 			from:  0,
 			to:    33,
-			promo: 113,
+			promo: Queen,
 		},
 		{
 			input: "h4c4",
@@ -155,7 +155,7 @@ func TestParseMove(t *testing.T) {
 			input: "g7f8n",
 			from:  54,
 			to:    61,
-			promo: 110,
+			promo: Knight,
 		},
 		{
 			input: "a0b5",

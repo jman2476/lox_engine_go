@@ -30,3 +30,22 @@ func (p Piece) String() string {
 		return "none"
 	}
 }
+
+func RuneToPiece(r rune) Piece {
+	switch r {
+	case 'p':
+		return Pawn
+	case 'k':
+		return King
+	case 'q':
+		return Queen
+	case 'b':
+		return Bishop
+	case 'n':
+		return Knight
+	case 'r':
+		return Rook
+	default:
+		return None
+	}
+}
