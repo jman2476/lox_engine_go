@@ -1,6 +1,10 @@
 package main
 
-import "testing"
+import (
+	"testing"
+
+	imath "github.com/jman2476/lox_engine_go/internal/intmath"
+)
 
 func TestFindPiece(t *testing.T) {
 	var board Board
@@ -70,17 +74,35 @@ func TestMovePiece(t *testing.T) {
 		move     string
 		piece    rune
 		side     Side
-		expected int
+		expected uint64
 		err      error
 	}{
-		{},
+		{
+			move:     "e2e4",
+			piece:    'p',
+			side:     White,
+			expected: board.White.Pawn - imath.Exp2(12) + imath.Exp2(28),
+			err:      nil,
+		},
 	}
 
 	for _, c := range cases {
 		pieces := board.GetSide(c.side)
 		err := movePiece(c.move, &pieces)
 		if err != nil && err != c.err {
+			t.Errorf(
+				"Fail: Incorrected error\nCase: %s %q %s\nExpected: %v\nActual: %v",
+				c.move, c.piece, c.side,
+				c.err, err,
+			)
+		}
 
+		if pieces.GetPiece(c.piece) != c.expected {
+			t.Errorf(
+				"Fail: Result != Expected\nCase: %s %q %s\nExpected: %b\nActual: %b",
+				c.move, c.piece, c.side,
+				c.expected, pieces.GetPiece(c.piece),
+			)
 		}
 	}
 }

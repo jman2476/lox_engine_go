@@ -25,6 +25,13 @@ const (
 	Black
 )
 
+func (s Side) String() string {
+	if s == White {
+		return "white"
+	}
+	return "black"
+}
+
 func (b *Board) SetNew() {
 	b.White = SetupSide(White)
 	b.Black = SetupSide(Black)
