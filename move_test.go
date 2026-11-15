@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 
 	imath "github.com/jman2476/lox_engine_go/internal/intmath"
@@ -88,7 +89,11 @@ func TestMovePiece(t *testing.T) {
 
 	for _, c := range cases {
 		pieces := board.GetSide(c.side)
+		fmt.Printf("Before: %b\n", *(pieces.GetPiece(c.piece)))
+		board.Print()
 		err := movePiece(c.move, &pieces)
+		fmt.Printf("After: %b\n", *(pieces.GetPiece(c.piece)))
+		board.Print()
 		if err != nil && err != c.err {
 			t.Errorf(
 				"Fail: Incorrected error\nCase: %s %q %s\nExpected: %v\nActual: %v",
@@ -97,7 +102,7 @@ func TestMovePiece(t *testing.T) {
 			)
 		}
 
-		if pieces.GetPiece(c.piece) != c.expected {
+		if *(pieces.GetPiece(c.piece)) != c.expected {
 			t.Errorf(
 				"Fail: Result != Expected\nCase: %s %q %s\nExpected: %b\nActual: %b",
 				c.move, c.piece, c.side,
