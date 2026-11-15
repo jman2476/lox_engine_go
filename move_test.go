@@ -114,7 +114,7 @@ func TestMovePiece(t *testing.T) {
 		board.Print()
 		if err != nil && err != c.err {
 			t.Errorf(
-				"Fail: Incorrected error\nCase: %s %q %s\nExpected: %v\nActual: %v",
+				"Fail: Incorrected error\nCase: %s %s %s\nExpected: %v\nActual: %v",
 				c.move, c.piece, c.side,
 				c.err, err,
 			)
@@ -136,13 +136,51 @@ func TestUnMovePiece(t *testing.T) {
 
 	cases := []struct {
 		move     string
-		piece    rune
+		piece    Piece
 		side     Side
 		capture  uint8
 		expected uint64
-	}{}
+	}{
+		{
+			move:     "e2e4",
+			piece:    Pawn,
+			side:     White,
+			expected: board.White.Pawn,
+		}, {
+			move:     "b2e3",
+			piece:    Knight,
+			side:     White,
+			expected: board.White.Knight,
+		}, {
+			move:     "d7d5",
+			piece:    Pawn,
+			side:     Black,
+			expected: board.Black.Pawn,
+		},
+	}
 
 	for _, c := range cases {
-		fmt.Print(c)
+		testCase := fmt.Sprintf("%s %s %s", c.move, c.piece, c.side)
+		pieces := board.GetSide(c.side)
+		err := movePiece(c.move, pieces)
+		if err != nil {
+			t.Errorf(
+				"Fail: move piece error: %v", err,
+			)
+		}
+
+		err = unMovePiece(c.move, pieces)
+		if err != nil {
+			t.Errorf(
+				"Fail: unmove piece error: %v", err,
+			)
+		}
+
+		if *(pieces.GetPiece(c.piece)) != c.expected {
+			t.Errorf(
+				"Fail: case: %s\nExpected: %b\nActual: %b",
+				testCase, c.expected, *(pieces.GetPiece(c.piece)),
+			)
+		}
 	}
 }

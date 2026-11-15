@@ -46,6 +46,20 @@ func movePiece(move string, pieceSet *PieceSet) error {
 }
 
 func unMovePiece(move string, pieceSet *PieceSet) error {
+	from, to, promo, err := parseMove(move)
+	if err != nil {
+		return err
+	}
 
+	piece, err := findPiece(to, pieceSet)
+	if err != nil {
+		return err
+	}
+
+	mask := pieceSet.GetPiece(piece)
+
+	if promo == 0 {
+		*mask += imath.Exp2(uint64(from)) - imath.Exp2(uint64(to))
+	}
 	return nil
 }
