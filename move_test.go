@@ -45,7 +45,7 @@ func TestFindPiece(t *testing.T) {
 		} else {
 			pieces = board.Black
 		}
-		result, err := findPiece(c.input, pieces)
+		result, err := findPiece(c.input, &pieces)
 		if err != nil && err != c.expectErr {
 			t.Errorf(
 				"Fail: Error\nCase: %d %v\nExpected: %v\nActual: %v",

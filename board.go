@@ -115,7 +115,7 @@ func (b *Board) GetSide(side Side) PieceSet {
 	return b.Black
 }
 
-func (ps *PieceSet) GetPiece(piece rune) uint64 {
+func (ps *PieceSet) GetPiece(piece rune) *uint64 {
 	switch piece {
 	case 'p':
 		return ps.GetPawn()
@@ -131,24 +131,24 @@ func (ps *PieceSet) GetPiece(piece rune) uint64 {
 		return ps.GetRook()
 	}
 
-	return 0
+	return nil
 }
 
-func (ps *PieceSet) GetPawn() uint64 {
-	return ps.Pawn
+func (ps *PieceSet) GetPawn() *uint64 {
+	return &ps.Pawn
 }
-func (ps *PieceSet) GetKing() uint64 {
-	return ps.King
+func (ps *PieceSet) GetKing() *uint64 {
+	return &ps.King
 }
-func (ps *PieceSet) GetQueen() uint64 {
-	return ps.Queen
+func (ps *PieceSet) GetQueen() *uint64 {
+	return &ps.Queen
 }
-func (ps *PieceSet) GetBishop() uint64 {
-	return ps.Bishop
+func (ps *PieceSet) GetBishop() *uint64 {
+	return &ps.Bishop
 }
-func (ps *PieceSet) GetKnight() uint64 {
-	return ps.Knight
+func (ps *PieceSet) GetKnight() *uint64 {
+	return &ps.Knight
 }
-func (ps *PieceSet) GetRook() uint64 {
-	return ps.Rook
+func (ps *PieceSet) GetRook() *uint64 {
+	return &ps.Rook
 }
