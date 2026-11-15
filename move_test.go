@@ -129,3 +129,20 @@ func TestMovePiece(t *testing.T) {
 		}
 	}
 }
+
+func TestUnMovePiece(t *testing.T) {
+	var board Board
+	board.SetNew()
+
+	cases := []struct {
+		move     string
+		piece    rune
+		side     Side
+		capture  uint8
+		expected uint64
+	}{}
+
+	for _, c := range cases {
+		fmt.Print(c)
+	}
+}

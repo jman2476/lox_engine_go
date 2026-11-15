@@ -44,3 +44,8 @@ func movePiece(move string, pieceSet *PieceSet) error {
 
 	return nil
 }
+
+func unMovePiece(move string, pieceSet *PieceSet) error {
+
+	return nil
+}
