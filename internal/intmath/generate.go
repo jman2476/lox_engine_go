@@ -51,7 +51,7 @@ func GenForeDiag(square uint64) (diag []uint64) {
 
 	for i := square; i < 64; i += 9 {
 		diag = append(diag, i)
-		if i%8 == 7 {
+		if OnHFile(i) {
 			break
 		}
 	}
@@ -59,7 +59,7 @@ func GenForeDiag(square uint64) (diag []uint64) {
 	if !OnAFile(square) && square > 8 {
 		for i := square - 9; i < 64; i -= 9 {
 			diag = append(diag, i)
-			if i%8 == 0 {
+			if OnAFile(i) {
 				break
 			}
 		}
@@ -76,7 +76,7 @@ func GenBackDiag(square uint64) (diag []uint64) {
 
 	for i := square; i < 64; i += 7 {
 		diag = append(diag, i)
-		if i%8 == 0 {
+		if OnAFile(i) {
 			break
 		}
 	}
@@ -84,7 +84,7 @@ func GenBackDiag(square uint64) (diag []uint64) {
 	if !OnHFile(square) && square > 7 {
 		for i := square - 7; i < 64; i -= 7 {
 			diag = append(diag, i)
-			if i%8 == 7 {
+			if OnHFile(i) {
 				break
 			}
 		}
