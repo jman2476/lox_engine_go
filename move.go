@@ -10,6 +10,12 @@ var (
 	ErrNoPieceFound = errors.New("no piece found to move")
 )
 
+type Move struct {
+	from      int
+	to        int
+	promotion Piece
+}
+
 func findPiece(square int, pieces *PieceSet) (Piece, error) {
 	v := imath.Exp2(uint64(square))
 	types := []Piece{Pawn, King, Queen, Bishop, Knight, Rook}
@@ -25,20 +31,20 @@ func findPiece(square int, pieces *PieceSet) (Piece, error) {
 }
 
 func movePiece(move string, pieceSet *PieceSet) error {
-	from, to, promo, err := parseMove(move)
+	mv, err := parseMove(move)
 	if err != nil {
 		return err
 	}
 
-	piece, err := findPiece(from, pieceSet)
+	piece, err := findPiece(mv.from, pieceSet)
 	if err != nil {
 		return err
 	}
 
 	mask := pieceSet.GetPiece(piece)
 
-	if promo == 0 {
-		*mask += imath.Exp2(uint64(to)) - imath.Exp2(uint64(from))
+	if mv.promotion == 0 {
+		*mask += imath.Exp2(uint64(mv.to)) - imath.Exp2(uint64(mv.from))
 
 	}
 
@@ -46,20 +52,33 @@ func movePiece(move string, pieceSet *PieceSet) error {
 }
 
 func unMovePiece(move string, pieceSet *PieceSet) error {
-	from, to, promo, err := parseMove(move)
+	mv, err := parseMove(move)
 	if err != nil {
 		return err
 	}
 
-	piece, err := findPiece(to, pieceSet)
+	piece, err := findPiece(mv.to, pieceSet)
 	if err != nil {
 		return err
 	}
 
 	mask := pieceSet.GetPiece(piece)
 
-	if promo == 0 {
-		*mask += imath.Exp2(uint64(from)) - imath.Exp2(uint64(to))
+	if mv.promotion == 0 {
+		*mask += imath.Exp2(uint64(mv.from)) - imath.Exp2(uint64(mv.to))
 	}
 	return nil
+}
+
+func validateMove(move string, piece Piece, board Board) bool {
+	switch piece {
+	case Pawn:
+		return validatePawn(move, board)
+	}
+
+	return false
+}
+
+func validatePawn(move string, board Board) bool {
+	return true
 }

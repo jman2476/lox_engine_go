@@ -167,29 +167,29 @@ func TestParseMove(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		from, to, promo, err := parseMove(c.input)
-		if from != c.from {
+		move, err := parseMove(c.input)
+		if move.from != c.from {
 			t.Errorf(
 				"Fail: case %s\nExpected: %v\nActual: %v\n",
 				c.input,
 				c.from,
-				from,
+				move.from,
 			)
 		}
-		if to != c.to {
+		if move.to != c.to {
 			t.Errorf(
 				"Fail: case %s\nExpected: %v\nActual: %v\n",
 				c.input,
 				c.to,
-				to,
+				move.to,
 			)
 		}
-		if promo != c.promo {
+		if move.promotion != c.promo {
 			t.Errorf(
 				"Fail: case %s\nExpected: %v\nActual: %v\n",
 				c.input,
 				c.promo,
-				promo,
+				move.promotion,
 			)
 		}
 		if err != nil && err != c.err {
