@@ -43,3 +43,53 @@ func genVertical(square uint64) (vert []uint64) {
 	slices.Sort(vert)
 	return
 }
+
+func genForeDiag(square uint64) (diag []uint64) {
+	if square > 63 {
+		return
+	}
+
+	for i := square; i < 64; i += 9 {
+		diag = append(diag, i)
+		if i%8 == 7 {
+			break
+		}
+	}
+
+	if square%8 != 0 && square > 8 {
+		for i := square - 9; i < 64; i -= 9 {
+			diag = append(diag, i)
+			if i%8 == 0 {
+				break
+			}
+		}
+	}
+
+	slices.Sort(diag)
+	return
+}
+
+func genBackDiag(square uint64) (diag []uint64) {
+	if square > 63 {
+		return
+	}
+
+	for i := square; i < 64; i += 7 {
+		diag = append(diag, i)
+		if i%8 == 0 {
+			break
+		}
+	}
+
+	if square%8 != 7 && square > 7 {
+		for i := square - 7; i < 64; i -= 7 {
+			diag = append(diag, i)
+			if i%8 == 7 {
+				break
+			}
+		}
+	}
+
+	slices.Sort(diag)
+	return
+}

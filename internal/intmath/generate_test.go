@@ -1,6 +1,8 @@
 package intmath
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestGenHorz(t *testing.T) {
 	cases := []struct {
@@ -39,8 +41,8 @@ func TestGenHorz(t *testing.T) {
 		for i, r := range result {
 			if r != c.expected[i] {
 				t.Errorf(
-					"Fail: unexpected result\nExpected: %v\nActual: %v\n",
-					c.expected, result,
+					"Fail: unexpected result\nCase: %d\nExpected: %v\nActual: %v\n",
+					c.input, c.expected, result,
 				)
 				break
 			}
@@ -86,12 +88,111 @@ func TestGenVert(t *testing.T) {
 		for i, r := range result {
 			if r != c.expected[i] {
 				t.Errorf(
-					"Fail: unexpected result\nExpected: %v\nActual: %v\n",
-					c.expected, result,
+					"Fail: unexpected result\nCase: %d\nExpected: %v\nActual: %v\n",
+					c.input, c.expected, result,
 				)
 				break
 			}
 		}
 
+	}
+}
+
+func TestGenForeDiag(t *testing.T) {
+	cases := []struct {
+		input    uint64
+		expected []uint64
+	}{
+		{
+			input:    34,
+			expected: []uint64{16, 25, 34, 43, 52, 61},
+		}, {
+			input:    4,
+			expected: []uint64{4, 13, 22, 31},
+		}, {
+			input:    7,
+			expected: []uint64{7},
+		}, {
+			input:    29,
+			expected: []uint64{2, 11, 20, 29, 38, 47},
+		},
+	}
+
+	for _, c := range cases {
+		result := genForeDiag(c.input)
+		if len(c.expected) != len(result) {
+			t.Errorf(
+				"Fail: incorrect result length\nExpected: %v %d\nActual: %v %d\n",
+				c.expected, len(c.expected),
+				result, len(result),
+			)
+			continue
+		}
+
+		for i, r := range result {
+			if r != c.expected[i] {
+				t.Errorf(
+					"Fail: unexpected result\nCase: %d\nExpected: %v\nActual: %v\n",
+					c.input, c.expected, result,
+				)
+				break
+			}
+		}
+	}
+}
+
+func TestGenBackDiag(t *testing.T) {
+	cases := []struct {
+		input    uint64
+		expected []uint64
+	}{
+		{
+			input:    49,
+			expected: []uint64{7, 14, 21, 28, 35, 42, 49, 56},
+		}, {
+			input:    0,
+			expected: []uint64{0},
+		}, {
+			input:    37,
+			expected: []uint64{23, 30, 37, 44, 51, 58},
+		}, {
+			input:    13,
+			expected: []uint64{6, 13, 20, 27, 34, 41, 48},
+		}, {
+			input:    47,
+			expected: []uint64{47, 54, 61},
+		}, {
+			input:    8,
+			expected: []uint64{1, 8},
+		}, {
+			input:    6,
+			expected: []uint64{6, 13, 20, 27, 34, 41, 48},
+		}, {
+			input:    48,
+			expected: []uint64{6, 13, 20, 27, 34, 41, 48},
+		},
+	}
+
+	for _, c := range cases {
+		result := genBackDiag(c.input)
+		if len(c.expected) != len(result) {
+			t.Errorf(
+				"Fail: incorrect result length\nCase: %d\nExpected: %v %d\nActual: %v %d\n",
+				c.input,
+				c.expected, len(c.expected),
+				result, len(result),
+			)
+			continue
+		}
+
+		for i, r := range result {
+			if r != c.expected[i] {
+				t.Errorf(
+					"Fail: unexpected result\nCase: %d\nExpected: %v\nActual: %v\n",
+					c.input, c.expected, result,
+				)
+				break
+			}
+		}
 	}
 }
