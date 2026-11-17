@@ -196,3 +196,65 @@ func TestGenBackDiag(t *testing.T) {
 		}
 	}
 }
+
+func TestOnAFile(t *testing.T) {
+	cases := []struct {
+		input    uint64
+		expected bool
+	}{
+		{
+			input:    54,
+			expected: false,
+		}, {
+			input:    16,
+			expected: true,
+		}, {
+			input:    56,
+			expected: true,
+		}, {
+			input:    55,
+			expected: false,
+		},
+	}
+
+	for _, c := range cases {
+		result := OnAFile(c.input)
+		if c.expected != result {
+			t.Errorf(
+				"Fail: case %d\nExpected: %t\nActual: %t",
+				c.input, c.expected, result,
+			)
+		}
+	}
+}
+
+func TestOnHFile(t *testing.T) {
+	cases := []struct {
+		input    uint64
+		expected bool
+	}{
+		{
+			input:    54,
+			expected: false,
+		}, {
+			input:    47,
+			expected: true,
+		}, {
+			input:    56,
+			expected: false,
+		}, {
+			input:    55,
+			expected: true,
+		},
+	}
+
+	for _, c := range cases {
+		result := OnHFile(c.input)
+		if c.expected != result {
+			t.Errorf(
+				"Fail: case %d\nExpected: %t\nActual: %t",
+				c.input, c.expected, result,
+			)
+		}
+	}
+}

@@ -56,7 +56,7 @@ func GenForeDiag(square uint64) (diag []uint64) {
 		}
 	}
 
-	if square%8 != 0 && square > 8 {
+	if !OnAFile(square) && square > 8 {
 		for i := square - 9; i < 64; i -= 9 {
 			diag = append(diag, i)
 			if i%8 == 0 {
@@ -81,7 +81,7 @@ func GenBackDiag(square uint64) (diag []uint64) {
 		}
 	}
 
-	if square%8 != 7 && square > 7 {
+	if !OnHFile(square) && square > 7 {
 		for i := square - 7; i < 64; i -= 7 {
 			diag = append(diag, i)
 			if i%8 == 7 {
@@ -92,4 +92,12 @@ func GenBackDiag(square uint64) (diag []uint64) {
 
 	slices.Sort(diag)
 	return
+}
+
+func OnAFile(square uint64) bool {
+	return square%8 == 0
+}
+
+func OnHFile(square uint64) bool {
+	return square%8 == 7
 }
