@@ -28,7 +28,7 @@ func TestGenHorz(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		result := genHorizontal(c.input)
+		result := GenHorizontal(c.input)
 		if len(c.expected) != len(result) {
 			t.Errorf(
 				"Fail: incorrect result length\nExpected: %v %d\nActual: %v %d\n",
@@ -75,7 +75,7 @@ func TestGenVert(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		result := genVertical(c.input)
+		result := GenVertical(c.input)
 		if len(c.expected) != len(result) {
 			t.Errorf(
 				"Fail: incorrect result length\nExpected: %v %d\nActual: %v %d\n",
@@ -119,7 +119,7 @@ func TestGenForeDiag(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		result := genForeDiag(c.input)
+		result := GenForeDiag(c.input)
 		if len(c.expected) != len(result) {
 			t.Errorf(
 				"Fail: incorrect result length\nExpected: %v %d\nActual: %v %d\n",
@@ -174,7 +174,7 @@ func TestGenBackDiag(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		result := genBackDiag(c.input)
+		result := GenBackDiag(c.input)
 		if len(c.expected) != len(result) {
 			t.Errorf(
 				"Fail: incorrect result length\nCase: %d\nExpected: %v %d\nActual: %v %d\n",

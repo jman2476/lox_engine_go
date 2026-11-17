@@ -10,7 +10,7 @@ import (
 //		- back diagonal
 //		- fore diagonal
 
-func genHorizontal(square uint64) (horz []uint64) {
+func GenHorizontal(square uint64) (horz []uint64) {
 	if square > 63 {
 		return
 	}
@@ -25,7 +25,7 @@ func genHorizontal(square uint64) (horz []uint64) {
 	return
 }
 
-func genVertical(square uint64) (vert []uint64) {
+func GenVertical(square uint64) (vert []uint64) {
 	if square > 63 {
 		return
 	}
@@ -44,7 +44,7 @@ func genVertical(square uint64) (vert []uint64) {
 	return
 }
 
-func genForeDiag(square uint64) (diag []uint64) {
+func GenForeDiag(square uint64) (diag []uint64) {
 	if square > 63 {
 		return
 	}
@@ -69,7 +69,7 @@ func genForeDiag(square uint64) (diag []uint64) {
 	return
 }
 
-func genBackDiag(square uint64) (diag []uint64) {
+func GenBackDiag(square uint64) (diag []uint64) {
 	if square > 63 {
 		return
 	}
